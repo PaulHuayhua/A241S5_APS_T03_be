@@ -1,3 +1,53 @@
 spring:
   application:
     name: prediccion-cosechas
+  
+  datasource:
+    url: jdbc:postgresql://ep-late-water-anyvp2fy-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require
+    username: neondb_owner
+    password: npg_Ldq0QVe1cRyI
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: America/Lima
+    open-in-view: false
+  
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: America/Lima
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    com.agroapp: INFO
+    org.hibernate.SQL: INFO
+    com.zaxxer.hikari: INFO
+
+# Configuración personalizada para carga de datos
+app:
+  data:
+    init: true  # Cambiar a false después de la primera ejecución
+
+# Configuración de Groq API
+groq:
+  api:
+    key: ${GROQ_API_KEY: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}  # Se debe configurar como variable de entorno
