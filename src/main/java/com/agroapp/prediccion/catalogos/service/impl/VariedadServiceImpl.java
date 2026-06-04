@@ -22,6 +22,11 @@ public class VariedadServiceImpl implements VariedadService {
     }
     
     @Override
+    public List<Variedad> findAllIncludingInactive() {
+        return variedadRepository.findAll();
+    }
+    
+    @Override
     public Optional<Variedad> findById(Integer id) {
         return variedadRepository.findById(id);
     }

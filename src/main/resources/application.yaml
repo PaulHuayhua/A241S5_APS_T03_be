@@ -42,12 +42,11 @@ logging:
     org.hibernate.SQL: INFO
     com.zaxxer.hikari: INFO
 
-# Configuración personalizada para carga de datos
 app:
   data:
-    init: true  # Cambiar a false después de la primera ejecución
+    init: true  
 
 # Configuración de Groq API
 groq:
   api:
-    key: ${GROQ_API_KEY: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}  # Se debe configurar como variable de entorno
+    key: ${GROQ_API_KEY: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}

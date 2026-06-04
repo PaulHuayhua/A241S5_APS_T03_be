@@ -18,7 +18,12 @@ public class VariedadRest {
     private final VariedadService variedadService;
     
     @GetMapping
-    public List<Variedad> getAllVariedades() {
+    public List<Variedad> getAllVariedades(
+            @RequestParam(required = false, defaultValue = "false") boolean includeInactive
+    ) {
+        if (includeInactive) {
+            return variedadService.findAllIncludingInactive();
+        }
         return variedadService.findAll();
     }
     

@@ -134,8 +134,10 @@ public class CultivoRest {
                         }
                         
                         cultivo.setIdCultivo(id);
-                        // Mantener el estado activo/inactivo del cultivo existente
-                        cultivo.setActivo(existing.getActivo());
+                        // Si no se especifica activo en el request, mantener el valor existente
+                        if (cultivo.getActivo() == null) {
+                            cultivo.setActivo(existing.getActivo());
+                        }
                         
                         Cultivo cultivoActualizado = cultivoService.save(cultivo);
                         return ResponseEntity.ok(cultivoActualizado);

@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import com.agroapp.prediccion.catalogos.model.Variedad;
 
-/**
- * Interfaz de servicio para la gestión de variedades
- */
+
 public interface VariedadService {
     
     List<Variedad> findAll();
+    
+    List<Variedad> findAllIncludingInactive();
     
     Optional<Variedad> findById(Integer id);
     
