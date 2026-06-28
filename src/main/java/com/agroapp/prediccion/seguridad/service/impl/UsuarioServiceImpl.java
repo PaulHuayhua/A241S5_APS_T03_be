@@ -5,6 +5,7 @@ import com.agroapp.prediccion.seguridad.repository.UsuarioRepository;
 import com.agroapp.prediccion.seguridad.service.UsuarioService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UsuarioService {
     
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
     
     @Override
     public List<Usuario> findAll() {
@@ -33,6 +35,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Override
     public Usuario save(Usuario usuario) {
+        // Si el password no está hasheado aún (no empieza con el prefijo BCrypt), lo hashea
+        if (usuario.getPasswordHash() != null && !usuario.getPasswordHash().startsWith("$2a$")) {
+            usuario.setPasswordHash(passwordEncoder.encode(usuario.getPasswordHash()));
+        }
         return usuarioRepository.save(usuario);
     }
     

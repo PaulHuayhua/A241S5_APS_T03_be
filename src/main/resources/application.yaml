@@ -11,8 +11,9 @@ spring:
       maximum-pool-size: 5
       minimum-idle: 2
       connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
+      idle-timeout: 300000
+      max-lifetime: 600000
+      keepalive-time: 60000
   
   jpa:
     hibernate:
@@ -52,3 +53,8 @@ app:
 groq:
   api:
     key: ${GROQ_API_KEY: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}
+
+# Configuración JWT
+jwt:
+  secret: ${JWT_SECRET:agroapp-secret-key-2024-prediccion-cosechas-secure}
+  expiration: 86400000
